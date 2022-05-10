@@ -1,11 +1,12 @@
 #include "MainWindow.h"
 #include "RectangleWidget.h"
+#include "MovableWidget.h"
 #include <QHBoxLayout>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
-    setGeometry(QRect(0, 0, 600, 400));
+    setGeometry(QRect(0, 0, 600, 200));
 
 //    RectangleWidget* rect = new RectangleWidget(this);
 //    rect->setFixedSize(10, 20);
@@ -16,10 +17,14 @@ MainWindow::MainWindow(QWidget *parent)
 //    rect->setStyleSheet("background:#FF9D3B; border:1px solid black; ");
 //    rect->setStyleSheet("border-right:0px;");
 
-    MovableWidget* lineWidget = new MovableWidget(this);
-    lineWidget->setGeometry(QRect(40,40,400,100));
+    QWidget* lineWidget = new QWidget(this);
+    lineWidget->setGeometry(QRect(80, 40, 400, 100));
+    lineWidget->setStyleSheet("border:1px solid black;");
+    QHBoxLayout* lineWidgetLayout = new QHBoxLayout(lineWidget);
 
-    QHBoxLayout* layout = new QHBoxLayout(this);
+    MovableWidget* moveWidget = new MovableWidget(this);
+    QHBoxLayout* moveWidgetLayout = new QHBoxLayout(this);
+    moveWidget->setLayout(moveWidgetLayout);
 
     for (auto i =0; i < 10; i++)
     {
@@ -32,10 +37,11 @@ MainWindow::MainWindow(QWidget *parent)
         else
             rect->setStyleSheet("border:1px solid black;");
 
-        layout->addWidget(rect);
+        moveWidgetLayout->addWidget(rect);
     }
 
-    lineWidget->setLayout(layout);
+    lineWidgetLayout->addWidget(moveWidget);
+    lineWidget->setLayout(lineWidgetLayout);
 
 }
 
