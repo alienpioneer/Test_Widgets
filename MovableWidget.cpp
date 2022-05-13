@@ -1,4 +1,5 @@
 #include "MovableWidget.h"
+#include <QDebug>
 
 MovableWidget::MovableWidget(QWidget *parent):
     m_isMovable(true)
@@ -9,6 +10,7 @@ MovableWidget::MovableWidget(QWidget *parent):
 void MovableWidget::mousePressEvent(QMouseEvent *event)
 {
     m_mousePressOffset = event->pos();
+    qDebug() << "MovableWidget pressed";
 }
 
 void MovableWidget::mouseMoveEvent(QMouseEvent *event)

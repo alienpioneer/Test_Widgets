@@ -5,6 +5,7 @@
 #include <QDebug>
 
 RectangleWidget::RectangleWidget(QWidget *parent):
+    m_id(-1),
     m_fontSize(7),
     m_color(QColor( 0, 0, 0, 0 )),
     m_styleSheet(""),
@@ -15,6 +16,7 @@ RectangleWidget::RectangleWidget(QWidget *parent):
 {
     setParent(parent);
     setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+//    setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 }
 
 void RectangleWidget::setColor(QColor color, bool instantUpdate)
@@ -74,5 +76,6 @@ void RectangleWidget::mouseMoveEvent(QMouseEvent *event)
 //    setUpdatesEnabled(false);
     if (m_isMovable)
         move(mapToParent(event->pos() - m_mousePressOffset));
+     qDebug() << "RectangleWidget moved" << m_id;
 }
 

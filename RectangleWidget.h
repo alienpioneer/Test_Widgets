@@ -13,6 +13,8 @@ public:
     void setSelected( bool selected ) {m_isSelected = selected;};
     void setColor(QColor color, bool instantUpdate = true);
     void setText(QString text, bool instantUpdate = true);
+    void setId(int id){m_id = id;};
+    int id(){return m_id;};
 
 protected:
     void paintEvent( QPaintEvent* event ) override;
@@ -21,6 +23,7 @@ protected:
     void mouseMoveEvent(QMouseEvent *event) override;
 
 protected:
+    int m_id;
     int m_fontSize;
     QColor m_color;
     QColor m_switchColor;
