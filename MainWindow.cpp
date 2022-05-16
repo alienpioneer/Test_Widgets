@@ -3,7 +3,7 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
-    setGeometry(QRect(0, 0, 600, 200));
+    setGeometry(QRect(0, 0, 600, 400));
 
     ChainWidget* m_chainWidget = new ChainWidget(30, 20, 60, this);
     m_chainWidget->setFixedSize(600,100);
@@ -51,6 +51,23 @@ MainWindow::MainWindow(QWidget *parent)
     m_frameWidget->layout()->addWidget(m_scrollArea);
     m_frameWidget->layout()->addWidget(m_rightBtn);
 
+    /////////////--------------Overlapping widgets----------------------------------///////////////
+
+    QWidget* m_secondFrameWidget = new QWidget(this);
+    m_secondFrameWidget->setGeometry(QRect(80, 180, 200, 200));
+    m_secondFrameWidget->setStyleSheet("border:1px solid black;");
+    QGridLayout* gridLayout = new QGridLayout(m_secondFrameWidget);
+    gridLayout->setSpacing(0);
+    gridLayout->setMargin(0);
+    m_secondFrameWidget->setLayout(gridLayout);
+
+    QWidget* w1 = new QWidget();
+    QWidget* w2 = new QWidget();
+    w1->setStyleSheet("border:1px solid black;background-color: rgb(255, 0, 0, 128);");
+    w2->setStyleSheet("border:1px solid black;background-color: blue;");
+
+    gridLayout->addWidget(w2, 1, 0, 2, 2);
+    gridLayout->addWidget(w1, 0, 0, 2, 2);
 }
 
 MainWindow::~MainWindow()

@@ -6,6 +6,7 @@
 #include "ChainWidget.h"
 #include <QMainWindow>
 #include <QHBoxLayout>
+#include <QGridLayout>
 #include <QPushButton>
 #include <QScrollArea>
 #include <QScrollBar>
