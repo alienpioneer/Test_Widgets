@@ -1,6 +1,9 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "RectangleWidget.h"
+#include "MovableWidget.h"
+#include "ChainWidget.h"
 #include <QMainWindow>
 #include <QHBoxLayout>
 #include <QPushButton>
@@ -20,5 +23,10 @@ private:
     void onRightBtnPushed();
 
     QScrollArea* m_scrollArea;
+    ChainWidget* m_chainWidget;
+    QWidget*     m_frameWidget;
+    QPushButton* m_leftBtn;
+    QPushButton* m_rightBtn;
+    QWidget*     m_container;
 };
 #endif // MAINWINDOW_H

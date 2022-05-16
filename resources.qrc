@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>move_left.png</file>
+        <file>move_right.png</file>
+    </qresource>
+</RCC>
