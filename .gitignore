@@ -3,3 +3,7 @@ Test_Widgets.pro.user
 Test_Widgets.pro.user.263a55d
 
 Build/
+
+.qtc_clangd/
+
+Test_Widgets.pro.user.bfb6bfb
