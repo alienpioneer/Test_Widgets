@@ -5,7 +5,9 @@
 ChainWidget::ChainWidget(int nb_links, int elementWidth,int elementHeight, QWidget *parent )
     : QWidget{parent}
 {
-    setLayout(new QHBoxLayout(this));
+   setLayout(new QHBoxLayout(this));
+   layout()->setMargin(0);
+   layout()->setSpacing(0);
 
     for (auto i =0; i < nb_links; i++)
     {

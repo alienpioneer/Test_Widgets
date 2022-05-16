@@ -6,7 +6,7 @@ MainWindow::MainWindow(QWidget *parent)
     setGeometry(QRect(0, 0, 600, 200));
 
     ChainWidget* m_chainWidget = new ChainWidget(30, 20, 60, this);
-    m_chainWidget->setFixedSize(600,80);
+    m_chainWidget->setFixedSize(600,100);
 
     QWidget* m_frameWidget = new QWidget(this);
     m_frameWidget->setGeometry(QRect(80, 40, 420, 100));
