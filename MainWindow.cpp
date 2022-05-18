@@ -51,10 +51,10 @@ MainWindow::MainWindow(QWidget *parent)
     m_frameWidget->layout()->addWidget(m_scrollArea);
     m_frameWidget->layout()->addWidget(m_rightBtn);
 
-    /////////////--------------Overlapping widgets----------------------------------///////////////
+    /////////////--------------Overlapping widgets grid layout------------------------///////////////
 
     QWidget* m_secondFrameWidget = new QWidget(this);
-    m_secondFrameWidget->setGeometry(QRect(80, 180, 200, 200));
+    m_secondFrameWidget->setGeometry(QRect(80, 160, 100, 100));
     m_secondFrameWidget->setStyleSheet("border:1px solid black;");
     QGridLayout* gridLayout = new QGridLayout(m_secondFrameWidget);
     gridLayout->setSpacing(0);
@@ -68,6 +68,23 @@ MainWindow::MainWindow(QWidget *parent)
 
     gridLayout->addWidget(w2, 1, 0, 2, 2);
     gridLayout->addWidget(w1, 0, 0, 2, 2);
+
+    /////////////--------------Overlapping widgets abs position------------------------///////////////
+
+    QWidget* w3 = new QWidget();
+    QWidget* w4 = new QWidget();
+    w3->setStyleSheet("border:1px solid black;background-color: rgb(255, 0, 0, 128);");
+    w4->setStyleSheet("border:1px solid black;background-color: blue;");
+
+    QWidget* m_thirdFrameWidget = new QWidget(this);
+    m_thirdFrameWidget->setGeometry(QRect(200, 160, 200, 200));
+    m_thirdFrameWidget->setStyleSheet("border:1px solid black;");
+
+    w4->setGeometry(50,50,20,20);
+    w4->setParent(m_thirdFrameWidget);
+    w3->setGeometry(40,40,20,20);
+    w3->setParent(m_thirdFrameWidget);
+
 }
 
 MainWindow::~MainWindow()
