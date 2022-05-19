@@ -4,6 +4,7 @@
 #include "RectangleWidget.h"
 #include "MovableWidget.h"
 #include "ChainWidget.h"
+#include "Path.h"
 #include <QMainWindow>
 #include <QHBoxLayout>
 #include <QGridLayout>

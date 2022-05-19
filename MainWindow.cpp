@@ -77,13 +77,16 @@ MainWindow::MainWindow(QWidget *parent)
     w4->setStyleSheet("border:1px solid black;background-color: blue;");
 
     QWidget* m_thirdFrameWidget = new QWidget(this);
-    m_thirdFrameWidget->setGeometry(QRect(200, 160, 200, 200));
+    m_thirdFrameWidget->setGeometry(QRect(200, 160, 300, 200));
     m_thirdFrameWidget->setStyleSheet("border:1px solid black;");
 
-    w4->setGeometry(50,50,20,20);
-    w4->setParent(m_thirdFrameWidget);
-    w3->setGeometry(40,40,20,20);
-    w3->setParent(m_thirdFrameWidget);
+    Path* ph = new Path(m_thirdFrameWidget);
+    ph->setGeometry(1,1,300,200);
+
+//    w4->setGeometry(50,50,20,20);
+//    w4->setParent(m_thirdFrameWidget);
+//    w3->setGeometry(40,40,20,20);
+//    w3->setParent(m_thirdFrameWidget);
 
 }
 

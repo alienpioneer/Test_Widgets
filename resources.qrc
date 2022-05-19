@@ -2,5 +2,6 @@
     <qresource prefix="/">
         <file>move_left.png</file>
         <file>move_right.png</file>
+        <file>Semicircle.qml</file>
     </qresource>
 </RCC>
