@@ -15,8 +15,11 @@ void SemicircleWidget::paintEvent(QPaintEvent *event)
     painter->setPen(QPen(QColor(0, 0, 0), 1, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
 
     QPainterPath path;
+    path.moveTo(0, m_lineThickness);
+    path.quadTo(width()-m_lineThickness, 0, width()-m_lineThickness, width()-m_lineThickness);
+    path.quadTo(width()-m_lineThickness, height()-m_lineThickness, 0, height()-m_lineThickness);
+
     path.moveTo(0, 0);
-    path.quadTo(width()-m_lineThickness, 0, width()-m_lineThickness, width()-m_lineThickness);\
-    path.quadTo(width()-m_lineThickness, height(), 0, height());
+
     painter->drawPath(path);
 }
