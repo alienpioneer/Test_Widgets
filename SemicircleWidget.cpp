@@ -11,15 +11,12 @@ void SemicircleWidget::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event);
 
-    bool squared = width() == height()/2 ? true : false;
-
     QPainter* painter = new QPainter(this);
     painter->setRenderHint(QPainter::Antialiasing);
     painter->setPen(QPen(QColor(0, 0, 0), m_lineThickness, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
 
     int R = width()-m_lineThickness;
     int r = R - m_circlesDist;
-    float angle = -30.0;
 
     QPoint startA       = QPoint(0          , m_lineThickness);
     QPoint handleAUp    = QPoint(R          , m_lineThickness);
@@ -42,12 +39,13 @@ void SemicircleWidget::paintEvent(QPaintEvent *event)
     path.quadTo(handleBUp , midB);
     path.quadTo(handleBDown, endB);
 
-    QPoint A0 = QPoint(0,height()/2);
-    QPoint A1 = QPoint(r*qCos(angle), r*qSin(angle));
-    QPoint A2 = QPoint(R*qCos(qDegreesToRadians(angle)), R*qSin(qDegreesToRadians(angle)));
+//    float angle = -30.0;
+//    QPoint A0 = QPoint(0,height()/2);
+//    QPoint A1 = QPoint(r*qCos(angle), r*qSin(angle));
+//    QPoint A2 = QPoint(R*qCos(qDegreesToRadians(angle)), R*qSin(qDegreesToRadians(angle)));
 
-    path.moveTo(A0);
-    path.lineTo(A1);
+//    path.moveTo(A0);
+//    path.lineTo(A1);
 
     painter->drawPath(path);
 }
