@@ -1,10 +1,11 @@
 #include "SemicircleWidget.h"
 
-SemicircleWidget::SemicircleWidget(QWidget *parent, int distBetweenCircles)
+SemicircleWidget::SemicircleWidget(QWidget *parent, int distBetweenCircles, bool flip)
     : QWidget{parent},
       m_lineThickness(1)
 {
     m_circlesDist = distBetweenCircles;
+    m_flip = flip;
 }
 
 void SemicircleWidget::paintEvent(QPaintEvent *event)
@@ -18,34 +19,45 @@ void SemicircleWidget::paintEvent(QPaintEvent *event)
     int R = width()-m_lineThickness;
     int r = R - m_circlesDist;
 
-    QPoint startA       = QPoint(0          , m_lineThickness);
-    QPoint handleAUp    = QPoint(R          , m_lineThickness);
-    QPoint midA         = QPoint(R          , height()/2);
-    QPoint handleADown  = QPoint(R          , height()-m_lineThickness);
-    QPoint endA         = QPoint(0          , height()-m_lineThickness);
+    QPoint startA, handleAUp, midA, handleADown, endA;
+    QPoint startB, handleBUp, midB, handleBDown, endB;
 
-    QPoint startB       = QPoint(0          , startA.y() + m_circlesDist);
-    QPoint handleBUp    = QPoint(r          , handleAUp.y() + m_circlesDist);
-    QPoint midB         = QPoint(r          , midA.y());
-    QPoint handleBDown  = QPoint(r          , handleADown.y() - m_circlesDist);
-    QPoint endB         = QPoint(0          , endA.y() - m_circlesDist);
+    if (m_flip)
+    {
+       startA       = QPoint(width()         , m_lineThickness);
+       handleAUp    = QPoint(m_lineThickness , m_lineThickness);
+       midA         = QPoint(m_lineThickness , height()/2);
+       handleADown  = QPoint(m_lineThickness , height()-m_lineThickness);
+       endA         = QPoint(width()         , height()-m_lineThickness);
+
+       startB       = QPoint(startA.x()                     , startA.y() + m_circlesDist);
+       handleBUp    = QPoint(handleAUp.x() + m_circlesDist  , handleAUp.y() + m_circlesDist);
+       midB         = QPoint(handleAUp.x() + m_circlesDist  , midA.y());
+       handleBDown  = QPoint(handleAUp.x() + m_circlesDist  , handleADown.y() - m_circlesDist);
+       endB         = QPoint(endA.x()                       , endA.y() - m_circlesDist);
+    }
+    else
+    {
+       startA       = QPoint(0          , m_lineThickness);
+       handleAUp    = QPoint(R          , m_lineThickness);
+       midA         = QPoint(R          , height()/2);
+       handleADown  = QPoint(R          , height()-m_lineThickness);
+       endA         = QPoint(0          , height()-m_lineThickness);
+
+       startB       = QPoint(0          , startA.y() + m_circlesDist);
+       handleBUp    = QPoint(r          , handleAUp.y() + m_circlesDist);
+       midB         = QPoint(r          , midA.y());
+       handleBDown  = QPoint(r          , handleADown.y() - m_circlesDist);
+       endB         = QPoint(0          , endA.y() - m_circlesDist);
+    }
 
     QPainterPath path;
     path.moveTo(startA);
     path.quadTo(handleAUp , midA);
     path.quadTo(handleADown, endA);
-
     path.moveTo(startB);
     path.quadTo(handleBUp , midB);
     path.quadTo(handleBDown, endB);
-
-//    float angle = -30.0;
-//    QPoint A0 = QPoint(0,height()/2);
-//    QPoint A1 = QPoint(r*qCos(angle), r*qSin(angle));
-//    QPoint A2 = QPoint(R*qCos(qDegreesToRadians(angle)), R*qSin(qDegreesToRadians(angle)));
-
-//    path.moveTo(A0);
-//    path.lineTo(A1);
 
     painter->drawPath(path);
 }

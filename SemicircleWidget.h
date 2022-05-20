@@ -10,7 +10,7 @@ class SemicircleWidget : public QWidget
 {
     Q_OBJECT
 public:
-    explicit SemicircleWidget(QWidget *parent = nullptr, int distBetweenCircles = 10);
+    explicit SemicircleWidget(QWidget *parent = nullptr, int distBetweenCircles = 10, bool flip = false);
     void setThickness(int thickness) { m_lineThickness = thickness; };
     void setDistBetweenCircles(int dist) { m_circlesDist = dist; };
 
@@ -18,6 +18,7 @@ protected:
     void paintEvent(QPaintEvent *event) override;
 
 private:
+    bool m_flip;
     int m_circlesDist;
     int m_lineThickness;
 };
