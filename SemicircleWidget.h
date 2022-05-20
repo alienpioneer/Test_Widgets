@@ -4,12 +4,15 @@
 #include <QWidget>
 #include <QPainter>
 #include <QPainterPath>
+#include <QtMath>
 
 class SemicircleWidget : public QWidget
 {
     Q_OBJECT
 public:
-    explicit SemicircleWidget(QWidget *parent = nullptr, int distBetweenCircles = 1);
+    explicit SemicircleWidget(QWidget *parent = nullptr, int distBetweenCircles = 10);
+    void setThickness(int thickness) { m_lineThickness = thickness; };
+    void setDistBetweenCircles(int dist) { m_circlesDist = dist; };
 
 protected:
     void paintEvent(QPaintEvent *event) override;
