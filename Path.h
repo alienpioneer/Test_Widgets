@@ -13,6 +13,9 @@ public:
 
 protected:
     void paintEvent(QPaintEvent *event) override;
+
+private:
+    int m_lineThickness;
 };
 
 #endif // PATH_H

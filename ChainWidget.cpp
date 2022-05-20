@@ -14,8 +14,12 @@ ChainWidget::ChainWidget(int nb_links, int elementWidth,int elementHeight, QWidg
         RectangleWidget* rect = new RectangleWidget(this);
 //        rect->setMinimumSize(40, 60);
         rect->setFixedSize(elementWidth, elementHeight);
-        rect->setColor(QColor(255,0,0,255));
+        if (i%2)
+            rect->setColor(QColor(255,70,80,255));
+        else
+            rect->setColor(QColor(122, 163, 39, 255));
         rect->setId(i);
+        rect->setText(QString::number(i));
 
         if (i != nb_links - 1)
             rect->setStyleSheet("border:1px solid black; border-right:0px;");

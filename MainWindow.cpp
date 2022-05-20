@@ -71,22 +71,25 @@ MainWindow::MainWindow(QWidget *parent)
 
     /////////////--------------Overlapping widgets abs position------------------------///////////////
 
+    QWidget* m_thirdFrameWidget = new QWidget(this);
+    m_thirdFrameWidget->setGeometry(QRect(200, 160, 300, 200));
+//    m_thirdFrameWidget->setStyleSheet("border:1px solid black;");
+
     QWidget* w3 = new QWidget();
     QWidget* w4 = new QWidget();
     w3->setStyleSheet("border:1px solid black;background-color: rgb(255, 0, 0, 128);");
     w4->setStyleSheet("border:1px solid black;background-color: blue;");
 
-    QWidget* m_thirdFrameWidget = new QWidget(this);
-    m_thirdFrameWidget->setGeometry(QRect(200, 160, 300, 200));
-    m_thirdFrameWidget->setStyleSheet("border:1px solid black;");
+    //    w4->setGeometry(50,50,20,20);
+    //    w4->setParent(m_thirdFrameWidget);
+    //    w3->setGeometry(40,40,20,20);
+    //    w3->setParent(m_thirdFrameWidget);
 
-    Path* ph = new Path(m_thirdFrameWidget);
-    ph->setGeometry(1,1,300,200);
+//    Path* ph = new Path(m_thirdFrameWidget);
+//    ph->setGeometry(0,1,60,120);
 
-//    w4->setGeometry(50,50,20,20);
-//    w4->setParent(m_thirdFrameWidget);
-//    w3->setGeometry(40,40,20,20);
-//    w3->setParent(m_thirdFrameWidget);
+    SemicircleWidget* semCirc = new SemicircleWidget(m_thirdFrameWidget);
+    semCirc->setGeometry(0,1,60,120);
 
 }
 

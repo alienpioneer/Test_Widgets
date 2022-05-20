@@ -36,19 +36,17 @@ void RectangleWidget::paintEvent( QPaintEvent* event )
     Q_UNUSED( event );
 
     QPainter painter( this );
-    //   painter.setRenderHint( QPainter::Antialiasing, true );
-
-    QRect geo(0, 0, width(), height());
-
-    painter.fillRect(geo, m_color);
+    painter.setRenderHint( QPainter::Antialiasing);
 
     QPen pen( QColor( 0, 0, 0, 1 ), 1, Qt::SolidLine );
     QFont font( "Arial", m_fontSize, QFont::Light );
     painter.setPen( pen );
     painter.setFont( font );
     QRect textRect = QRect(0, height()/2-m_fontSize/2-1, width(), m_fontSize+2);
-
     painter.drawText(textRect,Qt::AlignCenter, m_text );
+
+    QRect geo(0, 0, width(), height());
+    painter.fillRect(geo, m_color);
 
     QStyleOption styleOpt;
     styleOpt.init(this);
