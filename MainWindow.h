@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include "RectangleWidget.h"
+#include "RoundedWidget.h"
 #include "MovableWidget.h"
 #include "ChainWidget.h"
 #include "SemicircleWidget.h"

@@ -14,6 +14,7 @@ SOURCES += \
     MovableWidget.cpp \
     Path.cpp \
     RectangleWidget.cpp \
+    RoundedWidget.cpp \
     ScrollAreaWidget.cpp \
     SemicircleWidget.cpp \
     main.cpp \
@@ -26,6 +27,7 @@ HEADERS += \
     MovableWidget.h \
     Path.h \
     RectangleWidget.h \
+    RoundedWidget.h \
     ScrollAreaWidget.h \
     SemicircleWidget.h
 

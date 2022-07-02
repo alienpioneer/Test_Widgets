@@ -91,9 +91,12 @@ MainWindow::MainWindow(QWidget *parent)
 //    Path* ph = new Path(m_thirdFrameWidget);
 //    ph->setGeometry(0,1,60,120);
 
-    SemicircleWidget* semCirc = new SemicircleWidget(m_thirdFrameWidget, 30, true);
+//    SemicircleWidget* semCirc = new SemicircleWidget(m_thirdFrameWidget, 30, true);
 //    semCirc->setThickness(2);
-    semCirc->setGeometry(0,0,60,120);
+//    semCirc->setGeometry(0,0,60,120);
+
+    RoundedWidget* roundW = new RoundedWidget(m_thirdFrameWidget, 60);
+    roundW ->setGeometry(0,0,400,120);
 }
 
 MainWindow::~MainWindow()
