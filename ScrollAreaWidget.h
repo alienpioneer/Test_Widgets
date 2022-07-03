@@ -14,7 +14,8 @@ class ScrollAreaWidget : public QWidget
 {
     Q_OBJECT
 public:
-    ScrollAreaWidget(QWidget* mainWidget, QRect geometryRect);
+    ScrollAreaWidget(QWidget* parent, QRect geometryRect);
+    void addWidget(QWidget* mainWidget);
 
 private slots:
     void onLeftBtnPushed();
