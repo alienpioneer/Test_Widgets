@@ -8,12 +8,12 @@ MainWindow::MainWindow(QWidget *parent)
     ChainWidget* chainWidget = new ChainWidget(30, 20, 60, this);
     chainWidget->setFixedSize(600,100);
 
-    QWidget* container = new QWidget();
-    container->setFixedSize(600,100);
-    container->setLayout(new QHBoxLayout());
-    container->layout()->setSpacing(0);
-    container->layout()->setMargin(0);
-    container->layout()->addWidget(chainWidget);
+//    QWidget* container = new QWidget();
+//    container->setFixedSize(600,100);
+//    container->setLayout(new QHBoxLayout());
+//    container->layout()->setSpacing(0);
+//    container->layout()->setMargin(0);
+//    container->layout()->addWidget(chainWidget);
 
 //    QWidget* frameWidget = new QWidget(this);
 //    frameWidget->setGeometry(QRect(80, 40, 420, 100));
@@ -28,8 +28,8 @@ MainWindow::MainWindow(QWidget *parent)
 //    moveWidget->layout()->addWidget(chainWidget);
 //    frameWidget->layout()->addWidget(moveWidget);
 
-    ScrollAreaWidget* area = new ScrollAreaWidget(chainWidget, QRect(80, 40, 420, 100));
-    area->setParent(this);
+    ScrollAreaWidget* area = new ScrollAreaWidget(this, QRect(80, 40, 420, 100));
+    area->addWidget(chainWidget);
 
     /////////////--------------Overlapping widgets grid layout------------------------///////////////
 
@@ -75,7 +75,7 @@ MainWindow::MainWindow(QWidget *parent)
 //    semCirc->setThickness(2);
 //    semCirc->setGeometry(0,0,60,120);
 
-    RoundedWidget* roundW = new RoundedWidget(m_thirdFrameWidget, 60);
+    RoundedWidget* roundW = new RoundedWidget(m_thirdFrameWidget, 60, 30);
     roundW ->setGeometry(0,0,400,120);
 }
 
