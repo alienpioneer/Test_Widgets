@@ -17,6 +17,7 @@ SOURCES += \
     RoundedWidget.cpp \
     ScrollAreaWidget.cpp \
     SemicircleWidget.cpp \
+    TableModel.cpp \
     main.cpp \
     MainWindow.cpp
 
@@ -29,7 +30,8 @@ HEADERS += \
     RectangleWidget.h \
     RoundedWidget.h \
     ScrollAreaWidget.h \
-    SemicircleWidget.h
+    SemicircleWidget.h \
+    TableModel.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

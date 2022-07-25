@@ -5,8 +5,8 @@ MainWindow::MainWindow(QWidget *parent)
 {
     setGeometry(QRect(0, 0, 600, 400));
 
-    ChainWidget* chainWidget = new ChainWidget(30, 20, 60, this);
-    chainWidget->setFixedSize(600,100);
+    //ChainWidget* chainWidget = new ChainWidget(30, 20, 60, this);
+    //chainWidget->setFixedSize(600,100);
 
 //    QWidget* container = new QWidget();
 //    container->setFixedSize(600,100);
@@ -28,8 +28,8 @@ MainWindow::MainWindow(QWidget *parent)
 //    moveWidget->layout()->addWidget(chainWidget);
 //    frameWidget->layout()->addWidget(moveWidget);
 
-    ScrollAreaWidget* area = new ScrollAreaWidget(this, QRect(80, 40, 420, 100));
-    area->addWidget(chainWidget);
+    //ScrollAreaWidget* area = new ScrollAreaWidget(this, QRect(80, 40, 420, 100));
+    //area->addWidget(chainWidget);
 
     /////////////--------------Overlapping widgets grid layout------------------------///////////////
 
@@ -51,8 +51,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     /////////////--------------Overlapping widgets abs position------------------------///////////////
 
-    QWidget* m_thirdFrameWidget = new QWidget(this);
-    m_thirdFrameWidget->setGeometry(QRect(80, 160, 400, 200));
+    //QWidget* m_thirdFrameWidget = new QWidget(this);
+    //m_thirdFrameWidget->setGeometry(QRect(80, 160, 400, 200));
 //    m_thirdFrameWidget->setStyleSheet("border:1px solid black;");
 
 //    QWidget* w3 = new QWidget();
@@ -75,8 +75,37 @@ MainWindow::MainWindow(QWidget *parent)
 //    semCirc->setThickness(2);
 //    semCirc->setGeometry(0,0,60,120);
 
-    RoundedWidget* roundW = new RoundedWidget(m_thirdFrameWidget, 60, 30);
-    roundW ->setGeometry(0,0,400,120);
+    //RoundedWidget* roundW = new RoundedWidget(m_thirdFrameWidget, 60, 30);
+    //roundW ->setGeometry(0,0,400,120);
+
+
+    /////////////--------------Test Tabs------------------------///////////////
+
+    QTabWidget* tabW = new QTabWidget(this);
+    tabW ->setGeometry(50,50,500,300);
+//    QWidget* testA = new QWidget();
+//    testA->setStyleSheet("border:2px solid black;");
+//    tabW->addTab(testA, "TabA");
+//    QWidget* testB = new QWidget();
+//    testB->setStyleSheet("border:1px solid black;");
+//    tabW->addTab(testB, "TabB");
+
+    TableModel* model = new TableModel(this);
+    QTableView* table = new QTableView(this);
+
+    tabW->addTab(table, "Table");
+
+    model->setHeaderData(0, Qt::Horizontal, QObject::tr("ID"), Qt::DisplayRole);
+    model->setHeaderData(1, Qt::Horizontal, QObject::tr("First name"), Qt::DisplayRole);
+    model->setHeaderData(2, Qt::Horizontal, QObject::tr("Last name"), Qt::DisplayRole);
+    qDebug() << model-> columnCount(QModelIndex());
+    qDebug() << model-> headerData(0,Qt::Horizontal,Qt::DisplayRole);
+    qDebug() << model-> headerData(1,Qt::Horizontal,Qt::DisplayRole);
+    table->setModel(model);
+    table->model()->insertRows(0,2, QModelIndex());
+    table->model()->insertRows( model-> rowCount(QModelIndex()),2, QModelIndex());
+
+    //table->model()->insertColumns(0,6);
 }
 
 MainWindow::~MainWindow()

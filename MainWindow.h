@@ -7,10 +7,13 @@
 #include "ChainWidget.h"
 #include "SemicircleWidget.h"
 #include "ScrollAreaWidget.h"
+#include "TableModel.h"
+#include <QHeaderView>
 #include "Path.h"
 #include <QMainWindow>
 #include <QHBoxLayout>
 #include <QGridLayout>
+#include <QTableView>
 
 
 class MainWindow : public QMainWindow
