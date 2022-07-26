@@ -7,3 +7,5 @@ Build/
 .qtc_clangd/
 
 Test_Widgets.pro.user.bfb6bfb
+
+.Build/
