@@ -81,8 +81,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     /////////////--------------Test Tabs------------------------///////////////
 
-    QTabWidget* tabW = new QTabWidget(this);
-    tabW ->setGeometry(50,50,500,300);
+//    QTabWidget* tabW = new QTabWidget(this);
+//    tabW ->setGeometry(50,50,500,300);
 //    QWidget* testA = new QWidget();
 //    testA->setStyleSheet("border:2px solid black;");
 //    tabW->addTab(testA, "TabA");
@@ -90,22 +90,59 @@ MainWindow::MainWindow(QWidget *parent)
 //    testB->setStyleSheet("border:1px solid black;");
 //    tabW->addTab(testB, "TabB");
 
-    TableModel* model = new TableModel(this);
+    /////////////--------------Test Table View------------------------///////////////
+
+    QWidget* tableWidget = new QWidget(this);
+    tableWidget->setLayout(new QHBoxLayout());
+    tableWidget->setGeometry(50,50,500,300);
+    tableWidget->layout()->setMargin(0);
+    tableWidget->layout()->setSpacing(0);
+
     QTableView* table = new QTableView(this);
+//    table->setStyleSheet("QTableView {border: 1px solid #666;gridline-color: #DDD;qproperty-iconSize: 48px 48px;} "\
+//                         "QTableView QHeaderView::section:horizontal{ border-left: 1px solid #AAA; border-top:none; } "\
+//                         "QTableView QHeaderView::section:horizontal:last  { border-right: none; } "\
+//                         "QScrollBar {background-color: #D8D8D8;border:none; } "\
+//                         "QScrollBar::handle {border: 1px solid #999;border-bottom-color: #666;border-right-color:#666;border-radius: 4px;"\
+//                         "background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #E4E4E4, stop:0.5 #D9D9D9, stop:0.501 #D3D3D3 }");
+    tableWidget->layout()->addWidget(table);
 
-    tabW->addTab(table, "Table");
+    table->setSelectionMode( QAbstractItemView::NoSelection );
+    table->setEditTriggers( QAbstractItemView::NoEditTriggers );
 
-    model->setHeaderData(0, Qt::Horizontal, QObject::tr("ID"), Qt::DisplayRole);
-    model->setHeaderData(1, Qt::Horizontal, QObject::tr("First name"), Qt::DisplayRole);
-    model->setHeaderData(2, Qt::Horizontal, QObject::tr("Last name"), Qt::DisplayRole);
-    qDebug() << model-> columnCount(QModelIndex());
-    qDebug() << model-> headerData(0,Qt::Horizontal,Qt::DisplayRole);
-    qDebug() << model-> headerData(1,Qt::Horizontal,Qt::DisplayRole);
+    table->verticalHeader()->hide();
+    //table->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+    //table->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
+    table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    table->horizontalHeader()->setSectionsClickable(false);
+    table->horizontalHeader()->setDefaultAlignment( Qt::AlignCenter | Qt::AlignVCenter );
+    table->setSizeAdjustPolicy( QAbstractScrollArea::AdjustToContents );
+
+    TableModel* model = new TableModel(this);
     table->setModel(model);
-    table->model()->insertRows(0,2, QModelIndex());
-    table->model()->insertRows( model-> rowCount(QModelIndex()),2, QModelIndex());
 
-    //table->model()->insertColumns(0,6);
+    // Call these functions directly on the custom the model
+    // The table->model() will return an abstract model
+    model->setHeaderLabels({"A","B","C","D"}, Qt::Horizontal);
+    model->setAltColumnColor(QColor(250,232,122));
+    model->useAltColumnColor(true);
+    model->useFirstColumnColor(true);
+
+    model->insertRows(0,2000, QModelIndex());
+    for( int i =0; i < 2000; i++ )
+    {
+        for( int j =0; j < 4; j++ )
+        {
+            model->setCellData(i,j,QString::number(i));
+            //model->setCellColor(i,j,QColor(255,123,124));
+        }
+    }
+
+    // Set the colors at the beggining
+    //model->setFirstColumnColor(QColor(0,255,0));
+    //model->setAltColumnColor(QColor(0,0,255));
+    //model->useAltColumnColor(false);
+    //model->useFirstColumnColor(false);
 }
 
 MainWindow::~MainWindow()
