@@ -11,15 +11,30 @@ TableModel::TableModel(QObject *parent)
       m_defaultBkgColor(QColor(255, 255, 255)),
       m_foregroundColor(QColor(0, 0, 0)),
       m_altColumnColor(QColor(250, 233, 163)),
-      m_headerBkgColor(QColor(212, 212, 212)),
+      m_headerBkgColor(QColor(152, 152, 152)),
       m_firstColumnBkgColor(QColor(237, 237, 237))
 {
 }
 
 
-TableModel::~TableModel()
+bool TableModel::setCellData(int row, int column,const QString data)
 {
-    //delete m_data;
+    return setData(index(row,column), data, Qt::DisplayRole);
+}
+
+
+bool TableModel::setCellColor(int row, int column,const QColor color)
+{
+    return setData(index(row,column), QVariant(color.name()), Qt::BackgroundRole);
+}
+
+
+bool TableModel::clear()
+{
+    if(m_rowCount > 0)
+        return  removeRows(0, m_rowCount, QModelIndex());
+    else
+        return false;
 }
 
 
@@ -61,9 +76,7 @@ bool TableModel::setHeaderData(int section, Qt::Orientation orientation, const Q
     {
         if (orientation == Qt::Horizontal)
         {
-            insertColumns(section, 1, QModelIndex());
             m_headerLabels.append(value.toString());
-
             emit headerDataChanged(orientation, section, section);
             return true;
         }
@@ -75,15 +88,15 @@ bool TableModel::setHeaderData(int section, Qt::Orientation orientation, const Q
 
 // Set the list with the header labels
 // Using this function will automatically set the number of columns
-bool TableModel::setHeaderLabels(QStringList headerLabels, Qt::Orientation orientation)
+bool TableModel::setHeaderLabels(const QStringList headerLabels, Qt::Orientation orientation)
 {
-    m_headerLabels = headerLabels;
-
     bool result = true;
 
-    for(auto& label : headerLabels)
+    insertColumns(0, headerLabels.size(), QModelIndex());
+
+    for(int i=0; i < headerLabels.size(); i++)
     {
-        result = result && setHeaderData(0, orientation, QObject::tr(label.toUtf8()), Qt::DisplayRole);
+        result = result && setHeaderData(i, orientation, QObject::tr(headerLabels.at(i).toUtf8()), Qt::DisplayRole);
     }
 
     return result;
@@ -152,6 +165,25 @@ bool TableModel::insertColumns(int column, int count, const QModelIndex &parent)
 }
 
 
+bool TableModel::removeRows(int row, int count, const QModelIndex &parent)
+{
+    beginRemoveRows(parent, row, row+count-1);
+
+    for (int i = 0; i < count; ++i) {
+        m_data.removeAt(row);
+    }
+
+    m_rowCount -= count;
+    if (m_rowCount < 0)
+    {
+        m_rowCount = 0;
+        qCritical() << "Row count is negative after remove rows !";
+    }
+    endRemoveRows();
+    return true;
+}
+
+
 // --------------------------------------- !!! DATA !!! ---------------------------------------
 
 QVariant TableModel::data(const QModelIndex &index, int role) const
@@ -208,7 +240,15 @@ bool TableModel::setData(const QModelIndex &index, const QVariant &value, int ro
 
         case Qt::BackgroundRole:
         {
-            m_bkgColors[index.row()][index.column()] = QColor(value.toString());
+            if(m_useFirstColumnColor && index.column() == 0)
+            {
+                QColor bkgColor = QColor(value.toString());
+                bkgColor.setHsv(bkgColor.hue(),bkgColor.saturation(), m_firstColumnBkgColor.value());
+                m_bkgColors[index.row()][index.column()] = bkgColor;
+            }
+            else
+                m_bkgColors[index.row()][index.column()] = QColor(value.toString());
+
             somethingChanged = true;
         }
             break;
@@ -234,18 +274,6 @@ bool TableModel::setData(const QModelIndex &index, const QVariant &value, int ro
 }
 
 
-bool TableModel::setCellData(int row, int column, QString data)
-{
-    return setData(index(row,column), data, Qt::DisplayRole);
-}
-
-
-bool TableModel::setCellColor(int row, int column, QColor color)
-{
-    return setData(index(row,column), QVariant(color.name()), Qt::BackgroundRole);
-}
-
-
 // --------------------------------------- COLORS ---------------------------------------
 void TableModel::useAltColumnColor(bool state)
 {
@@ -258,7 +286,7 @@ void TableModel::useAltColumnColor(bool state)
 }
 
 
-void TableModel::setAltColumnColor(QColor color)
+void TableModel::setAltColumnColor(const QColor color)
 {
     m_altColumnColor = color;
 
@@ -280,7 +308,7 @@ void TableModel::useFirstColumnColor(bool state)
 }
 
 
-void TableModel::setFirstColumnColor(QColor color)
+void TableModel::setFirstColumnColor(const QColor color)
 {
     m_firstColumnBkgColor = color;
 
@@ -332,7 +360,8 @@ Qt::ItemFlags TableModel::flags(const QModelIndex &index) const
         return QAbstractItemModel::flags(index);
     }
     //return QAbstractItemModel::flags(index) | Qt::ItemIsEditable;
-    return Qt::NoItemFlags;
+    //return Qt::NoItemFlags;
+    return Qt::NoItemFlags | Qt::ItemIsEditable;
 }
 
 

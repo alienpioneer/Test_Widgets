@@ -105,18 +105,20 @@ MainWindow::MainWindow(QWidget *parent)
 //                         "QScrollBar {background-color: #D8D8D8;border:none; } "\
 //                         "QScrollBar::handle {border: 1px solid #999;border-bottom-color: #666;border-right-color:#666;border-radius: 4px;"\
 //                         "background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #E4E4E4, stop:0.5 #D9D9D9, stop:0.501 #D3D3D3 }");
+
+   //table->setStyleSheet("QTableView QHeaderView::section {padding: 0 4px; background-color: #AAA;  border: 1px solid #777;}");
     tableWidget->layout()->addWidget(table);
 
-    table->setSelectionMode( QAbstractItemView::NoSelection );
-    table->setEditTriggers( QAbstractItemView::NoEditTriggers );
+//    table->setSelectionMode( QAbstractItemView::NoSelection );
+//    table->setEditTriggers( QAbstractItemView::NoEditTriggers );
 
     table->verticalHeader()->hide();
     //table->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
     //table->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
     table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     table->horizontalHeader()->setSectionsClickable(false);
-    table->horizontalHeader()->setDefaultAlignment( Qt::AlignCenter | Qt::AlignVCenter );
-    table->setSizeAdjustPolicy( QAbstractScrollArea::AdjustToContents );
+//    table->horizontalHeader()->setDefaultAlignment( Qt::AlignCenter | Qt::AlignVCenter );
+//    table->setSizeAdjustPolicy( QAbstractScrollArea::AdjustToContents );
 
     TableModel* model = new TableModel(this);
     table->setModel(model);
@@ -128,8 +130,8 @@ MainWindow::MainWindow(QWidget *parent)
     model->useAltColumnColor(true);
     model->useFirstColumnColor(true);
 
-    model->insertRows(0,2000, QModelIndex());
-    for( int i =0; i < 2000; i++ )
+    model->insertRows(0,10, QModelIndex());
+    for( int i =0; i < 10; i++ )
     {
         for( int j =0; j < 4; j++ )
         {
